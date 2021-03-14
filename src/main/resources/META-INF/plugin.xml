@@ -1,0 +1,34 @@
+<idea-plugin version="2">
+    <id>com.github.leonardusdani.breakpointsorganizer</id>
+    <name>Breakpoints Organizer</name>
+
+    <description><![CDATA[
+    The IntelliJ plugin that helps share/save breakpoints
+    ]]></description>
+
+
+    <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Build+Number+Ranges for description -->
+    <idea-version since-build="143.381.42"/>
+
+    <!-- please see https://confluence.jetbrains.com/display/IDEADEV/Plugin+Compatibility+with+IntelliJ+Platform+Products
+         on how to target different products -->
+    <depends>com.intellij.modules.lang</depends>
+
+    <extensions defaultExtensionNs="com.intellij">
+        <projectService serviceImplementation="com.github.leonardusdani.breakpointsorganizer.model.BreakpointsManagerConfig"/>
+        <projectService
+                serviceImplementation="com.github.leonardusdani.breakpointsorganizer.model.BreakpointsManagerConfigForWorkspace"/>
+        <toolWindow id="Breakpoints Organizer" anchor="bottom"
+                    factoryClass="com.github.leonardusdani.breakpointsorganizer.view.BreakpointsToolWindow"/>
+    </extensions>
+
+    <application-components>
+    </application-components>
+
+    <project-components>
+    </project-components>
+
+    <actions>
+    </actions>
+
+</idea-plugin>

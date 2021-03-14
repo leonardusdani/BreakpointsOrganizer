@@ -1,0 +1,39 @@
+buildscript {
+    ext.kotlin_version = '1.0.1-2'
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
+    }
+}
+
+plugins {
+    id "org.jetbrains.intellij" version "0.0.43"
+}
+
+apply plugin: 'org.jetbrains.intellij'
+apply plugin: 'kotlin'
+
+sourceCompatibility = JavaVersion.VERSION_1_6
+targetCompatibility = JavaVersion.VERSION_1_6
+
+intellij {
+    version '2016.1.2'
+    pluginName 'Breakpoints Organizer'
+
+    updateSinceUntilBuild = false
+    sameSinceUntilBuild = false
+}
+
+group 'com.github.leonardusdani.breakpointsorganizer'
+version '1.0.2-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    testCompile 'junit:junit:4.12'
+    compile "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
+}
