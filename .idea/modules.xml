@@ -3,8 +3,8 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/modules/breakpoints-manager.iml" filepath="$PROJECT_DIR$/.idea/modules/breakpoints-manager.iml" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/breakpoints-manager_main.iml" filepath="$PROJECT_DIR$/.idea/modules/breakpoints-manager_main.iml" group="breakpoints-manager" />
-      <module fileurl="file://$PROJECT_DIR$/.idea/modules/breakpoints-manager_test.iml" filepath="$PROJECT_DIR$/.idea/modules/breakpoints-manager_test.iml" group="breakpoints-manager" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/breakpoints-manager.main.iml" filepath="$PROJECT_DIR$/.idea/modules/breakpoints-manager.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/breakpoints-manager.test.iml" filepath="$PROJECT_DIR$/.idea/modules/breakpoints-manager.test.iml" />
     </modules>
   </component>
 </project>

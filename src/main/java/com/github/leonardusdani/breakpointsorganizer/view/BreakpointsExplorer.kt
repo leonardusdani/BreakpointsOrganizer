@@ -66,7 +66,7 @@ class BreakpointsExplorer(val project: Project) : SimpleToolWindowPanel(false, t
         ToolTipManager.sharedInstance().registerComponent(myTree)
 
         object : DoubleClickListener() {
-            override fun onDoubleClick(event: MouseEvent?): Boolean {
+            override fun onDoubleClick(event: MouseEvent): Boolean {
                 event ?: return false
                 val path = myTree.getClosestPathForLocation(event.x, event.y)
                 val selectedNode = path.lastPathComponent
@@ -119,11 +119,11 @@ class BreakpointsExplorer(val project: Project) : SimpleToolWindowPanel(false, t
                             fileUrl = it.fileUrl,
                             typeId = type.id,
                             line = it.line,
-                            condition = it.conditionExpression?.convertToEntity(),
+                            //condition = it.conditionExpression?.convertToEntity(),
                             isTemporary = it.isTemporary,
-                            isEnabled = it.isEnabled,
-                            isLogMessage = it.isLogMessage,
-                            logExpression = it.logExpressionObject?.convertToEntity()
+                            //isEnabled = it.isEnabled,
+                            //isLogMessage = it.isLogMessage,
+                            //logExpression = it.logExpressionObject?.convertToEntity()
                     ).let { list.add(it) }
                 }
 
@@ -141,7 +141,7 @@ class BreakpointsExplorer(val project: Project) : SimpleToolWindowPanel(false, t
             }
         }
 
-        override fun update(e: AnActionEvent?) {
+        override fun update(e: AnActionEvent) {
             e ?: return
             super.update(e)
             e.presentation.isEnabled = (XDebuggerManager.getInstance(project) as XDebuggerManagerImpl).breakpointManager.allBreakpoints.find { it is XLineBreakpoint<*> } != null
@@ -201,7 +201,7 @@ class BreakpointsExplorer(val project: Project) : SimpleToolWindowPanel(false, t
             }
         }
 
-        override fun update(e: AnActionEvent?) {
+        override fun update(e: AnActionEvent) {
             e ?: return
             super.update(e)
             e.presentation.isEnabled = myTree.selectionPath != null
@@ -209,7 +209,7 @@ class BreakpointsExplorer(val project: Project) : SimpleToolWindowPanel(false, t
     }
 
     inner class ApplyAction() : AnAction("Apply the selected breakpoint[s]", "Apply the selected breakpoint[s]", IconUtil.getEmptyIcon(false)) {
-        override fun actionPerformed(e: AnActionEvent?) {
+        override fun actionPerformed(e: AnActionEvent) {
             ApplicationManager.getApplication().runWriteAction {
                 myTree.selectionPaths.forEach {
                     val selectedPath = it ?: return@runWriteAction
@@ -251,7 +251,7 @@ class BreakpointsExplorer(val project: Project) : SimpleToolWindowPanel(false, t
     }
 
     inner class ShareAction() : AnAction("Share selected breakpoint[s] to project", "Share selected breakpoint[s] to project", IconUtil.getEmptyIcon(false)) {
-        override fun actionPerformed(e: AnActionEvent?) {
+        override fun actionPerformed(e: AnActionEvent) {
             val selectedPath = myTree.selectionPath ?: return
             val selectedNode = selectedPath.lastPathComponent as DefaultMutableTreeNode
             val userObject = selectedNode.userObject as? BreakpointsSetNode ?: return
@@ -265,7 +265,7 @@ class BreakpointsExplorer(val project: Project) : SimpleToolWindowPanel(false, t
             }
         }
 
-        override fun update(e: AnActionEvent?) {
+        override fun update(e: AnActionEvent) {
             super.update(e)
             e ?: return
 
@@ -282,7 +282,7 @@ class BreakpointsExplorer(val project: Project) : SimpleToolWindowPanel(false, t
     }
 
     inner class DisableAction() : AnAction("Disable selected breakpoint[s]", "Disable selected breakpoint[s]. If selected breakpoints are not applied, they will be ignored", IconUtil.getEmptyIcon(false)) {
-        override fun actionPerformed(e: AnActionEvent?) {
+        override fun actionPerformed(e: AnActionEvent) {
             ApplicationManager.getApplication().runWriteAction {
                 myTree.selectionPaths.forEach {
                     val selectedPath = it ?: return@runWriteAction
@@ -305,12 +305,12 @@ class BreakpointsExplorer(val project: Project) : SimpleToolWindowPanel(false, t
                 if (it !is XLineBreakpoint<*>) return@forEach
 
                 if (it.fileUrl == node.entity.fileUrl && it.line == node.entity.line) {
-                    it.isEnabled = false
+                    // it.isEnabled = false
                 }
             }
         }
 
-        override fun update(e: AnActionEvent?) {
+        override fun update(e: AnActionEvent) {
             e ?: return
             super.update(e)
             e.presentation.isEnabled = myTree.selectionPath != null
@@ -318,7 +318,7 @@ class BreakpointsExplorer(val project: Project) : SimpleToolWindowPanel(false, t
     }
 
     inner class EnableAction() : AnAction("Enable selected breakpoint[s]", "Enable selected breakpoint[s]. If selected breakpoints are not applied, they will be ignored", IconUtil.getEmptyIcon(false)) {
-        override fun actionPerformed(e: AnActionEvent?) {
+        override fun actionPerformed(e: AnActionEvent) {
             ApplicationManager.getApplication().runWriteAction {
                 myTree.selectionPaths.forEach {
                     val selectedPath = it ?: return@runWriteAction
@@ -341,12 +341,12 @@ class BreakpointsExplorer(val project: Project) : SimpleToolWindowPanel(false, t
                 if (it !is XLineBreakpoint<*>) return@forEach
 
                 if (it.fileUrl == node.entity.fileUrl && it.line == node.entity.line) {
-                    it.isEnabled = true
+                    //it.isEnabled = true
                 }
             }
         }
 
-        override fun update(e: AnActionEvent?) {
+        override fun update(e: AnActionEvent) {
             e ?: return
             super.update(e)
             e.presentation.isEnabled = myTree.selectionPath != null
